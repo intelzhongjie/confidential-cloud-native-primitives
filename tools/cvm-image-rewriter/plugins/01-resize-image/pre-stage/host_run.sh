@@ -8,6 +8,8 @@ source "${SCRIPTS_DIR}/common.sh"
 
 info "Guest Image is at ${GUEST_IMG}..."
 
+GUEST_SIZE=50G
+
 if [[ -z ${GUEST_SIZE} ]]; then
     warn "SKIP: Guest size is not defined via environment variable 'GUEST_SIZE'"
 else

@@ -7,6 +7,7 @@ pushd "$(dirname "$(readlink -f "$0")")" || exit 0
 source ../../../scripts/common.sh
 
 # Check CVM_USER, CVM_AUTH_KEY
+CVM_USER=tdx
 CVM_USER="${CVM_USER:-cvm}"
 info "Config user: $CVM_USER"
 

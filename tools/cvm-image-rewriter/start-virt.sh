@@ -11,8 +11,8 @@ GUEST_NAME="tdx-guest"
 GUEST_ROOTDIR=/tmp/libvirt-vms
 TEMPLATE="${CURR_DIR}/tdx-libvirt-ubuntu-host.xml.template"
 FORCE=false
-VCPU_NUM=1
-MEM_SIZE=4
+VCPU_NUM=8
+MEM_SIZE=16
 
 usage() {
     cat << EOM

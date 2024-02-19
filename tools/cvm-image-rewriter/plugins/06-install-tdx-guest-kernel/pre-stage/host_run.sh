@@ -7,6 +7,8 @@ SCRIPTS_DIR="${TOP_DIR}/scripts"
 source "${SCRIPTS_DIR}/common.sh"
 ARTIFACTS_GUEST=/srv
 
+CVM_TDX_GUEST_REPO=/home/zhongjie/vm/img/ccnp/confidential-cloud-native-primitives/tools/cvm-image-rewriter/pre-stage/artifacts/mvp-tdx-stack-guest-ubuntu-22.04
+
 # check environment variable 'CVM_TDX_GUEST_REPO'
 if [[ -z "$CVM_TDX_GUEST_REPO" ]]; then
     warn "SKIP: TDX guest repo is not defined via environment variable 'CVM_TDX_GUEST_REPO' "
@@ -42,6 +44,7 @@ PACKAGE_DIR=""$ARTIFACTS_GUEST"/$(basename "$CVM_TDX_GUEST_REPO")/jammy/"
 pushd \$PACKAGE_DIR || exit 0
 apt install ./amd64/linux-image-unsigned-*.deb ./amd64/linux-modules-*.deb \
         ./amd64/linux-headers-*.deb ./all/linux-headers-*.deb --allow-downgrades -y
+apt reinstall sudo
 popd || exit 0
 EOL
 

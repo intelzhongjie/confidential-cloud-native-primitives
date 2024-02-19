@@ -22,6 +22,22 @@ runcmd:
   - update-grub
 
 # Uncomment this section if you plan to change user/password
-# user: tdx
-# password: 123456
-# chpasswd: { expire: False }
+user: tdx
+password: 123456
+chpasswd: { expire: False }
+ssh_pwauth: True
+
+#user: root
+#password: 123456
+#chpasswd: { expire: False }
+
+#packages:
+#  - sudo
+
+users:
+  - name: tdx
+    passwd: 123456
+    groups: sudo
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    chpasswd: { expire: False }

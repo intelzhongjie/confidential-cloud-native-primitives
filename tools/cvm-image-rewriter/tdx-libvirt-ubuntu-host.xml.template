@@ -1,13 +1,18 @@
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
-  <name>tdx-guest</name>
+  <name>szj-tdx-guest</name>
   <memory unit='GiB'>REPLACE_MEM_SIZE</memory>
   <memoryBacking>
     <source type='memfd-private'/>
   </memoryBacking>
   <vcpu placement="static">REPLACE_VCPU_NUM</vcpu>
   <os>
+    <!--
     <type arch='x86_64' machine='q35'>hvm</type>
+    -->
+    <type arch='x86_64' machine='pc-q35-7.2'>hvm</type>
     <loader>/usr/share/qemu/OVMF.fd</loader>
+    <kernel>/home/zhongjie/vm/img/ccnp/confidential-cloud-native-primitives/tools/cvm-image-rewriter/vmlinuz-6.2.16-v5.1.mvp41-generic</kernel>
+    <cmdline>rw selinux=0 apparmor=0 console=hvc0 earlyprintk console=tty0 root=/dev/vda1</cmdline>
     <boot dev='hd'/>
   </os>
   <features>
@@ -35,10 +40,19 @@
       <source file='/path/to/image'/>
       <target dev='vda' bus='virtio'/>
     </disk>
+    <interface type='bridge'>
+      <mac address='00:60:2f:91:0f:39'/>
+      <source bridge='virbr0'/>
+      <target dev='vnet0'/>
+      <model type='virtio'/>
+      <alias name='net0'/>
+      <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0'/>
+    </interface>
     <interface type="user">
       <model type="virtio"/>
     </interface>
     <console type='pty'>
+      <log file='/home/zhongjie/vm/img/ccnp/confidential-cloud-native-primitives/tools/cvm-image-rewriter/szj_dbg_log.txt'/>
       <target type='virtio' port='0'/>
     </console>
     <channel type='unix'>
